@@ -1,17 +1,24 @@
+import { Button, Input, Select, Stack } from "@chakra-ui/react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { Heading } from "@chakra-ui/react";
 
 const CreateInvoicePage = () => {
   const [name, setName] = useState("null");
   return (
     <>
       <Link to="/">Retour à la page d'acceuil</Link>
-      <h2>Créer une facture</h2>
-      <select>
-        <option>Client 1</option>
-        <option>Client 2</option>
-      </select>
-      <input placeholder="Montant de la facture"></input>
+      <Heading>Créer une facture</Heading>
+      <Stack>
+        <Select>
+          <option>Payé</option>
+          <option>Envoyé</option>
+        </Select>
+        <Input placeholder="Montant de la facture"></Input>
+        <Button>
+          <Link to="/">Créer</Link>
+        </Button>
+      </Stack>
     </>
   );
 };
