@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "cypress:open": "cypress open",
     "test": "cd app && ng test",
     "start": "cd app && ng serve --host 0.0.0.0 --disable-host-check --hmr",
     "cy:run": "cypress run",
@@ -21,8 +22,9 @@
   },
   "homepage": "https://github.com/liorchamla/amu-frontend-eval#readme",
   "devDependencies": {
+    "@faker-js/faker": "^8.4.1",
     "@types/cypress": "^1.1.3",
-    "cypress": "^9.2.0"
+    "cypress": "^13.6.6"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.10.0"
