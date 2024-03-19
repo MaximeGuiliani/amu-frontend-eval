@@ -6,7 +6,7 @@
   "scripts": {
     "cypress:open": "cypress open",
     "test": "cd app && ng test",
-    "start": "cd app && ng serve --host 0.0.0.0 --disable-host-check --hmr",
+    "start": "cd invoiceApp && npm i && npm run dev",
     "cy:run": "cypress run",
     "cy:open": "cypress open"
   },
@@ -27,6 +27,6 @@
     "cypress": "^13.6.6"
   },
   "dependencies": {
-    "@supabase/supabase-js": "^2.10.0"
+    "@supabase/supabase-js": "^2.39.8"
   }
 }

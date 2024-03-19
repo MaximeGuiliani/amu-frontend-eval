@@ -9,15 +9,16 @@ const SUPABASE_API_KEY =
  * @param {boolean} status
  * @returns Promise<{id: number, done: boolean, text: string}>
  */
-const getAllCustomers = () => {
-  return fetch(`${SUPABASE_URL}?select=*`, {
+const getAllCustomers = async () => {
+  const response = await fetch(`${SUPABASE_URL}?select=*`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
       apiKey: SUPABASE_API_KEY,
       Prefer: "return=representation",
     },
-  }).then((response) => response.json());
+  });
+  return await response.json();
 };
 
 export default getAllCustomers;

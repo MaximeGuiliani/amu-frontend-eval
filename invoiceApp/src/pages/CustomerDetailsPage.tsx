@@ -1,21 +1,39 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
-import { Card, CardHeader, CardBody, CardFooter, Stack } from '@chakra-ui/react'
+import { Link, useLocation } from "react-router-dom";
+import {
+  Card,
+  CardHeader,
+  CardBody,
+  CardFooter,
+  Stack,
+  Heading,
+  Button,
+  Flex,
+} from "@chakra-ui/react";
 
 const CustomerDetailsPage = () => {
   const [name, setName] = useState("null");
 
+  const location = useLocation();
+
   return (
     <>
-
-
-      <Link to="/">Retour aux tâches</Link>
-      <h2>Fiche de {name}</h2>
-      <h3>mail</h3>
-      <Stack>
-
+      <Stack spacing={4}>
+        <Stack spacing={4} align="center">
+          <Link to="/">Retour aux tâches</Link>
+          <Heading>Fiche de {location.state.name}</Heading>
+          <h3>mail</h3>
+          </Stack>
+          <Stack>
+            <Flex justify="flex-end">
+              <Link to={"invoice/add"}>
+                <Button variant="secondary" size="lg">
+                  ADD +
+                </Button>
+              </Link>
+            </Flex>
+        </Stack>
       </Stack>
-      <Link to={"1/invoice/add"}>Créer une facture</Link>
     </>
   );
 };

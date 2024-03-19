@@ -1,5 +1,10 @@
-export type Client = {
+export class Client {
   name: string;
   email: string;
-  id: number;
-};
+  user_id: string;
+  constructor(name: string, email: string, user_id: string) {
+    this.name = name;
+    this.email = email;
+    this.user_id = user_id;
+  }
+}
