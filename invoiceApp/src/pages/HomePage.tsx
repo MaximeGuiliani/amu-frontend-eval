@@ -9,11 +9,11 @@ import {
   Td,
   Th,
   Thead,
-  Tr
+  Tr,
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import getAllCustomers from "../api/http";
+import { getAllCustomers } from "../api/http";
 import { Client } from "../types/Client";
 
 const HomePage = () => {
@@ -22,7 +22,7 @@ const HomePage = () => {
   useEffect(() => {
     // Appel HTTP vers Supabase
     getAllCustomers().then((items) => {
-      // On remplace la valeur actuel de state
+      // On remplace la valeur actuelle de state
       // par le tableau d'items venant de l'API
       console.log(items);
       setState(items);
@@ -46,10 +46,12 @@ const HomePage = () => {
             </Thead>
             <Tbody>
               {state.map((item) => (
-                <Tr>
-                  <Link to={`/${item.user_id}`} state={{ name: item.name }}>
-                    <Td>{item.name}</Td>
-                  </Link>
+                <Tr key={item.user_id}>
+                  <Td>
+                    <Link to={`/${item.user_id}`} state={{ name: item.name }}>
+                      {item.name}
+                    </Link>
+                  </Td>
                   <Td>{item.email}</Td>
                 </Tr>
               ))}
