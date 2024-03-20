@@ -1,5 +1,5 @@
-import { Customer } from "../types/Customer";
 import { CustomerData } from "../types/CustomerData";
+import { InvoiceData } from "../types/InvoiceData";
 
 const SUPABASE_URL_CUSTOMERS =
   "https://frdixacpxwhtyrnvmbhp.supabase.co/rest/v1/Customers";
@@ -73,10 +73,40 @@ const createCustomer = async (customerData: CustomerData) => {
   return data;
 };
 
+const createInvoice = async (invoiceData: InvoiceData) => {
+  const response = await fetch(SUPABASE_URL_INVOICES, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      apiKey: SUPABASE_API_KEY,
+      Prefer: "return=representation",
+    },
+    body: JSON.stringify(invoiceData),
+  });
+  const data = await response.json();
+  return data;
+};
+
+const updateInvoiceStatus = async (id: string) => {
+  const response = await fetch(`${SUPABASE_URL_INVOICES}?invoice_id=eq.${id}`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+      apiKey: SUPABASE_API_KEY,
+      Prefer: "return=representation",
+    },
+    body: JSON.stringify({ is_paid: true }),
+  });
+  const data = await response.json();
+  return data[0]; // Return the updated invoice data
+};
+
 export default getAllCustomers;
 export {
   getAllCustomers,
   getCustomerById,
   getCustomerInvoices,
   createCustomer,
+  createInvoice,
+  updateInvoiceStatus
 };

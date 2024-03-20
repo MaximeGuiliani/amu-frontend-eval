@@ -38,15 +38,16 @@ const CreateCustomerPage = () => {
     <>
       <Stack spacing={4}>
         <Stack spacing={4} align="center">
-          <Heading>Create Customer</Heading>
+          <Heading>Créer un client</Heading>
         </Stack>
 
         <form onSubmit={handleSubmit}>
           <VStack spacing={5}>
             <FormControl id="form">
-              <FormLabel>Customer Details</FormLabel>
+              <FormLabel>Détails du client</FormLabel>
               <VStack spacing={5}>
                 <Input
+                  name="email"
                   type="email"
                   value={email}
                   onChange={updateEmail}
@@ -54,7 +55,8 @@ const CreateCustomerPage = () => {
                 />
 
                 <Input
-                  placeholder="Full Name"
+                  name="fullName"
+                  placeholder="Nom complet"
                   value={name}
                   onChange={updateName}
                 />
@@ -63,12 +65,12 @@ const CreateCustomerPage = () => {
             <HStack spacing={1}>
               <Link to={"/"}>
                 <Button mt={4} colorScheme="red" variant="outline">
-                  Cancel
+                  Annuler
                 </Button>
               </Link>
 
               <Button mt={4} colorScheme="blue" variant="outline" type="submit">
-                Save
+                Enregistrer
               </Button>
             </HStack>
           </VStack>

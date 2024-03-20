@@ -17,7 +17,7 @@ function App() {
             <Route path="/create" element={<CreateCustomerPage />} />
             <Route path="/:idCustomer" element={<CustomerDetailsPage />} />
             <Route
-              path="/:idcustomer/invoice/add"
+              path="/:idcustomer/invoices/add"
               element={<CreateInvoicePage />}
             />
           </Routes>
