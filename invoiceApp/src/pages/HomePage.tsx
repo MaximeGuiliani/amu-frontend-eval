@@ -14,10 +14,10 @@ import {
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { getAllCustomers } from "../api/http";
-import { Client } from "../types/Client";
+import { Customer } from "../types/Customer";
 
 const HomePage = () => {
-  const [state, setState] = useState<Client[]>([]);
+  const [state, setState] = useState<Customer[]>([]);
 
   useEffect(() => {
     // Appel HTTP vers Supabase

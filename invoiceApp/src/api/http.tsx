@@ -1,3 +1,6 @@
+import { Customer } from "../types/Customer";
+import { CustomerData } from "../types/CustomerData";
+
 const SUPABASE_URL_CUSTOMERS =
   "https://frdixacpxwhtyrnvmbhp.supabase.co/rest/v1/Customers";
 const SUPABASE_URL_INVOICES =
@@ -56,6 +59,24 @@ const getCustomerInvoices = async (id: string) => {
   const data = await response.json();
   return data; // Return the first item in the array
 };
+const createCustomer = async (customerData: CustomerData) => {
+  const response = await fetch(SUPABASE_URL_CUSTOMERS, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      apiKey: SUPABASE_API_KEY,
+      Prefer: "return=representation",
+    },
+    body: JSON.stringify(customerData),
+  });
+  const data = await response.json();
+  return data;
+};
 
 export default getAllCustomers;
-export { getAllCustomers, getCustomerById ,getCustomerInvoices};
+export {
+  getAllCustomers,
+  getCustomerById,
+  getCustomerInvoices,
+  createCustomer,
+};

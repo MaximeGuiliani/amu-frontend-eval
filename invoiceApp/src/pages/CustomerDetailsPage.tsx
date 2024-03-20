@@ -13,17 +13,17 @@ import {
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { getCustomerById, getCustomerInvoices } from "../api/http";
-import { Client } from "../types/Client";
+import { Customer } from "../types/Customer";
 import { Invoice } from "../types/Invoice";
 
 const CustomerDetailsPage = () => {
-  const [state, setState] = useState<Client | undefined>();
+  const [state, setState] = useState<Customer | undefined>();
   const [invoices, setInvoices] = useState<Invoice[] | undefined>([]);
   const { idCustomer } = useParams<{ idCustomer: string }>();
 
   useEffect(() => {
     // Appel HTTP vers Supabase avec l'id présent dans l'URL
-    getCustomerById(idCustomer ?? "").then((items: Client) => {
+    getCustomerById(idCustomer ?? "").then((items: Customer) => {
       setState(items);
     });
   }, [idCustomer]);

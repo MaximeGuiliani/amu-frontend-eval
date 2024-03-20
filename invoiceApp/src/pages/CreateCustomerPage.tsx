@@ -9,9 +9,13 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import React, { FormEvent } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { createCustomer } from "../api/http";
+import { CustomerData } from "../types/CustomerData";
 
 const CreateCustomerPage = () => {
+  const navigate = useNavigate();
+
   const [email, setEmail] = React.useState("");
   const [name, setName] = React.useState("");
 
@@ -24,7 +28,10 @@ const CreateCustomerPage = () => {
 
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault();
-    console.log(email);
+    const customerData = new CustomerData(name, email);
+    createCustomer(customerData);
+    // redirect to home page
+    navigate("/");
   };
 
   return (
