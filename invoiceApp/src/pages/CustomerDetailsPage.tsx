@@ -21,14 +21,14 @@ import { Customer } from "../types/Customer";
 import { Invoice } from "../types/Invoice";
 
 const CustomerDetailsPage = () => {
-  const [state, setState] = useState<Customer | undefined>();
+  const [customer, setCustomer] = useState<Customer | undefined>();
   const [invoices, setInvoices] = useState<Invoice[] | undefined>([]);
   const { idCustomer } = useParams<{ idCustomer: string }>();
 
   useEffect(() => {
     // Appel HTTP vers Supabase avec l'id présent dans l'URL
     getCustomerById(idCustomer ?? "").then((items: Customer) => {
-      setState(items);
+      setCustomer(items);
     });
   }, [idCustomer]);
   function getInvoices() {
@@ -59,8 +59,8 @@ const CustomerDetailsPage = () => {
           </Flex>
         </Stack>
         <Stack spacing={4} align="center">
-          <Heading>Information sur {state?.name ?? "Name Undefined"}</Heading>
-          <h3>{state?.email}</h3>
+          <Heading>Information sur {customer?.name ?? "Name Undefined"}</Heading>
+          <h3>{customer?.email}</h3>
         </Stack>
         {invoices?.length === 0 ? (
           <Heading>Pas de factures</Heading>
@@ -77,7 +77,7 @@ const CustomerDetailsPage = () => {
               {invoices?.map((invoice) => (
                 <Tr key={invoice.invoice_id}>
                   <Td>{invoice.invoice_price} €</Td>
-                  <Td>{invoice.is_paid ? "Paid" : "Waiting for payment"}</Td>
+                  <Td>{invoice.is_paid ? "Payé" : "En attente du payement"}</Td>
                   <Td>
                     {" "}
                     {invoice.is_paid ? null : (
@@ -85,11 +85,12 @@ const CustomerDetailsPage = () => {
                         colorScheme="green"
                         variant="outline"
                         onClick={() =>
-                          window.confirm("Mark this invoice as paid?") &&
-                          setConfirmed(invoice.invoice_id)
+                          window.confirm(
+                            "Marquer cette facture comme payée ?"
+                          ) && setConfirmed(invoice.invoice_id)
                         }
                       >
-                        Paid
+                        Marquer à payée
                       </Button>
                     )}
                   </Td>

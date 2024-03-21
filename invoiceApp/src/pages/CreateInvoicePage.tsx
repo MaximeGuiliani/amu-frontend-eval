@@ -1,18 +1,28 @@
 import { Button, Input, Select, Stack } from "@chakra-ui/react";
-import {  useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { Heading } from "@chakra-ui/react";
-import { FormEvent } from "react";
-import { createInvoice } from "../api/http";
+import { FormEvent, useEffect, useState } from "react";
+import { createInvoice, getCustomerById } from "../api/http";
 import { InvoiceData } from "../types/InvoiceData";
 import React from "react";
+import { Customer } from "../types/Customer";
 
 const CreateInvoicePage = () => {
   const navigate = useNavigate();
+
+  const [customer, setCustomer] = useState<Customer | undefined>();
 
   const { idcustomer } = useParams<{ idcustomer: string }>();
 
   const [amount, setAmount] = React.useState("");
   const [is_paid, setIsPaid] = React.useState("PAID");
+
+  useEffect(() => {
+    // Appel HTTP vers Supabase avec l'id présent dans l'URL
+    getCustomerById(idcustomer ?? "").then((items: Customer) => {
+      setCustomer(items);
+    });
+  }, [idcustomer]);
 
   const updateAmount = (event: React.ChangeEvent<HTMLInputElement>) => {
     setAmount(event.target.value);
@@ -23,6 +33,10 @@ const CreateInvoicePage = () => {
 
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault();
+    if (!amount) {
+      alert("Veuillez remplir le champ montant.");
+      return;
+    }
     const invoiceData = new InvoiceData(
       idcustomer ?? "no name",
       amount.toString(),
@@ -37,14 +51,14 @@ const CreateInvoicePage = () => {
     <>
       <Stack spacing={4}>
         <Stack spacing={4} align="center">
-          <Heading>Create invoice </Heading>
-          <div> For Customer : maxime</div>
+          <Heading>Créer une facture </Heading>
+          <div> Pour le Client : {customer?.name ?? "Pas de nom"}</div>
         </Stack>
         <form onSubmit={handleSubmit}>
           <Stack>
             <Select name="status" onChange={updateIsPaid}>
-              <option>PAID</option>
-              <option>SENT</option>
+              <option value={"PAID"}>Payé</option>
+              <option value={"SENT"}>Envoyé</option>
             </Select>
 
             <div style={{ position: "relative" }}>
@@ -52,7 +66,7 @@ const CreateInvoicePage = () => {
                 onChange={updateAmount}
                 name="amount"
                 type="number"
-                placeholder="Invoice price"
+                placeholder="Prix de la facture"
                 style={{ paddingRight: "30px" }}
               />
               <div
@@ -67,7 +81,9 @@ const CreateInvoicePage = () => {
               </div>
             </div>
 
-            <Button type="submit">Enregistrer la facture</Button>
+            <Button mt={4} colorScheme="blue" variant="outline" type="submit">
+              Enregistrer la facture
+            </Button>
           </Stack>
         </form>
       </Stack>

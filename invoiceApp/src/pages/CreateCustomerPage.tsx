@@ -28,6 +28,24 @@ const CreateCustomerPage = () => {
 
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault();
+    const trimmedName = name.trim();
+    const trimmedEmail = email.trim();
+
+    const missingFields = [];
+
+    if (!trimmedName) {
+      missingFields.push("Nom complet");
+    }
+
+    if (!trimmedEmail) {
+      missingFields.push("Email");
+    }
+
+    if (missingFields.length > 0) {
+      const fieldsMessage = missingFields.join(", ");
+      alert(`Veuillez remplir les champs suivants : ${fieldsMessage}.`);
+      return;
+    }
     const customerData = new CustomerData(name, email);
     createCustomer(customerData);
     // redirect to home page

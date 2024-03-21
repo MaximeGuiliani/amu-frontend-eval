@@ -1,12 +1,13 @@
-import { useState } from "react";
 import { Link } from "react-router-dom";
+import { Logo } from "./Logo";
+import logoImage from "../assets/logo.png";
 
 const Header = () => {
-  const [name, setName] = useState("null");
-
   return (
     <>
-      <Link to={"/"}>Home</Link>
+      <Link to={"/"}>
+        <Logo  imageUrl={logoImage} />
+      </Link>
     </>
   );
 };
