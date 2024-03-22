@@ -1,3 +1,0 @@
-- faire les TU
-- clean le projet 
-- remettre la version du prof de cypress pour ne pas avoir de problème de version
