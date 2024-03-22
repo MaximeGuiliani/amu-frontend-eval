@@ -48,7 +48,6 @@ const CreateCustomerPage = () => {
     }
     const customerData = new CustomerData(name, email);
     createCustomer(customerData);
-    // redirect to home page
     navigate("/");
   };
 

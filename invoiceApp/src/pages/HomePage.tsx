@@ -20,10 +20,7 @@ const HomePage = () => {
   const [state, setState] = useState<Customer[]>([]);
 
   useEffect(() => {
-    // Appel HTTP vers Supabase
     getAllCustomers().then((items) => {
-      // On remplace la valeur actuelle de state
-      // par le tableau d'items venant de l'API
       console.log(items);
       setState(items);
     });

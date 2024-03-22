@@ -26,7 +26,6 @@ const CustomerDetailsPage = () => {
   const { idCustomer } = useParams<{ idCustomer: string }>();
 
   useEffect(() => {
-    // Appel HTTP vers Supabase avec l'id présent dans l'URL
     getCustomerById(idCustomer ?? "").then((items: Customer) => {
       setCustomer(items);
     });
@@ -38,7 +37,7 @@ const CustomerDetailsPage = () => {
   }
   useEffect(() => {
     getInvoices();
-  }, [idCustomer]);
+  });
 
   function setConfirmed(invoiceId: string): void {
     updateInvoiceStatus(invoiceId).then(() => {

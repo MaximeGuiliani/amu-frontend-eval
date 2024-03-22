@@ -18,7 +18,6 @@ const CreateInvoicePage = () => {
   const [is_paid, setIsPaid] = React.useState("PAID");
 
   useEffect(() => {
-    // Appel HTTP vers Supabase avec l'id présent dans l'URL
     getCustomerById(idcustomer ?? "").then((items: Customer) => {
       setCustomer(items);
     });
@@ -43,7 +42,6 @@ const CreateInvoicePage = () => {
       is_paid === "PAID" ? true : false
     );
     createInvoice(invoiceData);
-    // redirect to home page
     navigate("/" + idcustomer);
   };
 
